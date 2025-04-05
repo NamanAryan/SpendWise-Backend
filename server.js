@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import expenseRoutes from './routes/transactionRoute.js';
 import userRoute from './routes/userRoute.js';
+import streakRoute from './routes/streakRoute.js';
+import dashboardRoute from './routes/dashboardRoute.js';
+import analyticsRoute from './routes/analyticsRoute.js';
 
 dotenv.config();
 
@@ -34,9 +37,14 @@ app.get('/', (req, res) => {
   res.send(`Server running at Port ${process.env.PORT}!`);
 });
 
+// API routes
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/users', userRoute);
+app.use('/api/streaks', streakRoute);
+app.use('/api/dashboard', dashboardRoute);
+app.use('/api/analytics', analyticsRoute);
 
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
