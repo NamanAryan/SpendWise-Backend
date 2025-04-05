@@ -21,9 +21,9 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: Number,
     },
-    balalnce: {
+    balance: {
         type: Number,
-        default: 20000
+        default: 0
     },
 
 },{timestamps: true});

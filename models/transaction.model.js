@@ -55,7 +55,8 @@ const expenseSchema = new Schema({
   created_at: {
     type: Date,
     default: Date.now
-  }
+  },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 expenseSchema.index({ User_ID: 1, Date: -1 });
