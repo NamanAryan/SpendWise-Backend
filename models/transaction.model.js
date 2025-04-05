@@ -39,6 +39,10 @@ const expenseSchema = new Schema({
     type: Boolean,
     default: false
   },
+  free_impulse_purchase: {
+    type: Boolean,
+    default: false
+  },
   User_ID: {
     type: String,
     required: true,
