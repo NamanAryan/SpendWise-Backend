@@ -6,6 +6,7 @@ import expenseRoutes from './routes/transactionRoute.js';
 import userRoute from './routes/userRoute.js';
 import streakRoute from './routes/streakRoute.js';
 import dashboardRoute from './routes/dashboardRoute.js';
+import budgetSummaryRoute from './routes/budgetSummaryRoute.js';
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.use('/api/expenses', expenseRoutes);
 app.use('/api/users', userRoute);
 app.use('/api/streaks', streakRoute);
 app.use('/api/dashboard', dashboardRoute);
+app.use('/api/budget-summary', budgetSummaryRoute);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

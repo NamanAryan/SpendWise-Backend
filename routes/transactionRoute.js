@@ -2,7 +2,6 @@ import express from 'express';
 import Expense from '../models/transaction.model.js';
 import User from '../models/user.model.js'; // Make sure this exists
 import protect from '../middleware/auth.middleware.js';
-import streakService from '../services/streakService.js';
 
 const router = express.Router();
 
