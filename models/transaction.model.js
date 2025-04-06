@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { predictImpulse } from './impulsePrediction.js';
 const Schema = mongoose.Schema;
 
 const expenseSchema = new Schema({
@@ -57,6 +58,33 @@ const expenseSchema = new Schema({
     default: Date.now
   },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+});
+
+expenseSchema.pre('save', async function(next) {
+  if (this.isModified('Impulse_Tag') && this.isNew === false) {
+    return next();
+  }
+  
+  try {
+    // Get transaction data for prediction
+    const transaction = {
+      Category: this.Category,
+      Amount: this.Amount,
+      Time_of_Day: this.Time_of_Day,
+      is_Need: this.is_Need
+    };
+    
+    // Call prediction function
+    const prediction = await predictImpulse(transaction);
+    
+    // Set the Impulse_Tag based on prediction
+    this.Impulse_Tag = prediction.isImpulse;
+    
+    next();
+  } catch (error) {
+    console.error('Error predicting impulse purchase:', error);
+    next();
+  }
 });
 
 expenseSchema.index({ User_ID: 1, Date: -1 });
